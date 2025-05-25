@@ -17,5 +17,30 @@
      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
   
-  
+  .footer {
+  text-align: center;
+  position: relative;
+  margin-top: 2rem;
+
+  img {
+    width: 300px;
+    height: auto;
+  }
+
+  .dialogo {
+    background-color: #97ea86;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -50px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 40px;
+    
+  }
+}
   

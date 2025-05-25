@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Germán Cabrera">
+    <title>Social Board</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Snippet&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/MainPage.css">
+</head>
+
+<body>
+     <div class="custom-navbar">
+    <div class="logo">
+      <img src="IMG/avocado.png" alt="Logo" />
+    </div>
+    <div class="nav-center">
+      <a href="MainPage.html" class="nav-button">HOME</a>
+      <a href="index.html" class="nav-button">COMMUNITY</a>
+    </div>
+    <div class="nav-right">
+      <a href="PaginaPerfil.html" class="nav-button">PROFILE</a>
+    </div>
+  </div>
+ <div class="triangulo"></div>
+    <div class="triangulo"></div>
+    <div class="triangulo"></div>
+    <div class="triangulo"></div>
+    <div class="triangulo"></div>
+    <div class="triangulo"></div>
+    <div class="triangulo"></div>
+    <div class="triangulo"></div>
+    <div class="triangulo"></div>
+   
+ <div class="container">
+    <div class="message-container">
+      <div class="dialogo">
+        <p>"Saludos usuario, esto es lo último que ha ocurrido..."</p>
+      </div>
+      <img class="mascota-img" src="IMG/Mascotado.png" alt="Mascotado" />
+    </div>
+
+    <div class="user-info">
+      <img class="profile-img" src="IMG/avo1.png" alt="Foto de perfil" />
+      <div class="user-box">
+        <div class="user-header">@Tamara96NH</div>
+        <div class="user-content">
+          <p>"Soy la única que pone antes la leche que los cereales o qué?"</p>
+        </div>
+      </div>
+    </div>
+    <div class="icons-bottom">
+      <img class="icon-like" src="IMG/megusta.png" alt="Like" />
+      <img class="icon-dislike" src="IMG/megusta.png" alt="disLike" />
+      <span class="likes">4 Likes</span>
+      <span class="comments">4 comentarios</span>
+      <button class="openCommentBtn" style="margin-left: 10px;">Comentar</button>
+    </div>
+
+    <div class="user-info">
+      <img class="profile-img" src="IMG/avo2.png" alt="Foto de perfil" />
+      <div class="user-box">
+        <div class="user-header">@PaltarugoDeMiPrimo</div>
+        <div class="user-content">
+          <p>"Twitter se ha caído vamos todos al aguacate"</p>
+        </div>
+      </div>
+    </div>
+    <div class="icons-bottom">
+      <img class="icon-like" src="IMG/megusta.png" alt="Like" />
+      <img class="icon-dislike" src="IMG/megusta.png" alt="disLike" />
+      <span class="likes">16755 likes</span>
+      <span class="comments">847 comentarios</span>
+      <button class="openCommentBtn" style="margin-left: 10px;">Comentar</button>
+    </div>
+
+    <div class="user-info">
+      <img class="profile-img" src="IMG/avo3.png" alt="Foto de perfil" />
+      <div class="user-box">
+        <div class="user-header">@Guacapobre</div>
+        <div class="post-img-container">
+          <img class="post-img" src="IMG/avo4.png" alt="Publicación de @Guacapobre" />
+        </div>
+      </div>
+    </div>
+    <div class="icons-bottom">
+      <img class="icon-like" src="IMG/megusta.png" alt="Like" />
+      <img class="icon-dislike" src="IMG/megusta.png" alt="disLike" />
+      <span class="likes">443 Likes</span>
+      <span class="comments">42 comentarios</span>
+      <button class="openCommentBtn" style="margin-left: 10px;">Comentar</button>
+    </div>
+  </div>
+   <div class="modal-overlay" id="commentModal">
+    <div class="modal">
+      <h3>Añadir comentario</h3>
+      <textarea id="commentInput" placeholder="Escribe tu comentario aquí..."></textarea>
+      <div style="display:flex; justify-content:flex-end; gap:1rem;">
+        <button id="cancelBtn">Cancelar</button>
+        <button id="submitBtn">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.querySelectorAll('.icons-bottom').forEach(container => {
+    const likeBtn = container.querySelector('.icon-like');
+    const dislikeBtn = container.querySelector('.icon-dislike');
+    const likesSpan = container.querySelector('.likes');
+
+    let reacted = null; // null, 'like', 'dislike'
+
+    function getLikes() {
+      return parseInt(likesSpan.textContent) || 0;
+    }
+
+    function setLikes(num) {
+      likesSpan.textContent = num + ' Likes';
+    }
+
+    likeBtn.addEventListener('click', () => {
+      let currentLikes = getLikes();
+
+      if (reacted === 'like') {
+        // Quitar like
+        setLikes(currentLikes - 1);
+        reacted = null;
+      } else if (reacted === 'dislike') {
+        // Cambiar dislike por like (+2)
+        setLikes(currentLikes + 2);
+        reacted = 'like';
+      } else {
+        // Dar like nuevo
+        setLikes(currentLikes + 1);
+        reacted = 'like';
+      }
+    });
+
+    dislikeBtn.addEventListener('click', () => {
+      let currentLikes = getLikes();
+
+      if (reacted === 'dislike') {
+        // Quitar dislike
+        setLikes(currentLikes + 1);
+        reacted = null;
+      } else if (reacted === 'like') {
+        // Cambiar like por dislike (-2)
+        setLikes(currentLikes - 2);
+        reacted = 'dislike';
+      } else {
+        // Dar dislike nuevo
+        setLikes(currentLikes - 1);
+        reacted = 'dislike';
+      }
+    });
+  });
+</script>
+
+
+<script>
+    // Likes/dislikes logic (sin cambios)
+    document.querySelectorAll('.icons-bottom').forEach(container => {
+      const likeBtn = container.querySelector('.icon-like');
+      const dislikeBtn = container.querySelector('.icon-dislike');
+      const likesSpan = container.querySelector('.likes');
+
+      let reacted = null; // null, 'like', 'dislike'
+
+      function getLikes() {
+        return parseInt(likesSpan.textContent) || 0;
+      }
+
+      function setLikes(num) {
+        likesSpan.textContent = num + ' Likes';
+      }
+
+      likeBtn.addEventListener('click', () => {
+        let currentLikes = getLikes();
+
+        if (reacted === 'like') {
+          // Quitar like
+          setLikes(currentLikes - 1);
+          reacted = null;
+        } else if (reacted === 'dislike') {
+          // Cambiar dislike por like (+2)
+          setLikes(currentLikes + 2);
+          reacted = 'like';
+        } else {
+          // Dar like nuevo
+          setLikes(currentLikes + 1);
+          reacted = 'like';
+        }
+      });
+
+      dislikeBtn.addEventListener('click', () => {
+        let currentLikes = getLikes();
+
+        if (reacted === 'dislike') {
+          // Quitar dislike
+          setLikes(currentLikes + 1);
+          reacted = null;
+        } else if (reacted === 'like') {
+          // Cambiar like por dislike (-2)
+          setLikes(currentLikes - 2);
+          reacted = 'dislike';
+        } else {
+          // Dar dislike nuevo
+          setLikes(currentLikes - 1);
+          reacted = 'dislike';
+        }
+      });
+    });
+
+    // Modal comentario logic
+    const modal = document.getElementById('commentModal');
+    const commentInput = document.getElementById('commentInput');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const submitBtn = document.getElementById('submitBtn');
+
+    let currentCommentsSpan = null; // Contador actual de comentarios a modificar
+
+    document.querySelectorAll('.openCommentBtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const iconsBottom = btn.closest('.icons-bottom');
+        currentCommentsSpan = iconsBottom.querySelector('.comments');
+
+        modal.style.display = 'flex';
+        commentInput.value = '';
+        commentInput.focus();
+      });
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Cerrar modal si clic fuera del cuadro
+    modal.addEventListener('click', e => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    submitBtn.addEventListener('click', () => {
+      const val = commentInput.value.trim();
+      if (val.length === 0) {
+        modal.style.display = 'none';
+        return;
+      }
+
+      if (currentCommentsSpan) {
+        // Extraer número actual y actualizar texto
+        let currentComments = parseInt(currentCommentsSpan.textContent) || 0;
+        currentCommentsSpan.textContent =
+          (currentComments + 1) +
+          ((currentComments + 1) === 1 ? ' comentario' : ' comentarios');
+      }
+
+      modal.style.display = 'none';
+      alert('Comentario añadido: "' + val + '"');
+    });
+  </script>
+
+</body>
+
+</html>
