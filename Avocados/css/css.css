@@ -1,0 +1,21 @@
+.message-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+  }
+  
+  .dialogo {
+    background-color: #97ea86;
+    color: #333;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 1rem;
+    max-width: 300px;
+    
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  
